@@ -8,13 +8,29 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
+import HomeIcon from "@mui/icons-material/Home";
+import BookmarksIcon from "@mui/icons-material/Bookmarks";
 import { Button } from "@mui/material";
 import { AuthContext } from "../../contexts/AuthContext";
 import { useContext } from "react";
+import { Link } from "react-router-dom";
 
 const drawerWidth = 240;
+
+const routesInfo = [
+  {
+    id: 1,
+    name: "HomePage",
+    path: "/dashboard/home",
+    icon: <HomeIcon />,
+  },
+  {
+    id: 2,
+    name: "Bookmarked restaurants",
+    path: "/dashboard/bookmarks",
+    icon: <BookmarksIcon />,
+  },
+];
 
 export default function Sidebar() {
   const { logout } = useContext(AuthContext);
@@ -38,15 +54,15 @@ export default function Sidebar() {
         anchor="left"
       >
         <List>
-          {["HomePage", "Bookmarked restaurants"].map((text, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItemButton>
-            </ListItem>
+          {routesInfo.map((route) => (
+            <Link key={route.id} to={route.path}>
+              <ListItem disablePadding>
+                <ListItemButton>
+                  <ListItemIcon>{route.icon}</ListItemIcon>
+                  <ListItemText primary={route.name} />
+                </ListItemButton>
+              </ListItem>
+            </Link>
           ))}
         </List>
         <Divider />
