@@ -1,5 +1,10 @@
+import { useContext } from "react";
+import { RestaurantContext } from "../../contexts/RestaurantContext";
+
 const Bookmarks = () => {
-  return <div>bookmark</div>;
+  const { bookmarkedRestraunts } = useContext(RestaurantContext);
+
+  return <div>{bookmarkedRestraunts.length}</div>;
 };
 
 export default Bookmarks;

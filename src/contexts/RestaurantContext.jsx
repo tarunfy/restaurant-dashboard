@@ -6,6 +6,8 @@ export const RestaurantContext = createContext(null);
 export const RestrauntProvider = ({ children }) => {
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
   const [restaurants, setRestaurants] = useState([]);
+  const [myAddedRestraunts, setMyAddedRestraunts] = useState([]);
+  const [bookmarkedRestraunts, setBookmarkedRestraunts] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -47,9 +49,22 @@ export const RestrauntProvider = ({ children }) => {
     );
   };
 
+  const addRestraunt = (name) => {
+    setMyAddedRestraunts((prev) => [...prev, name]);
+  };
+
   return (
     <RestaurantContext.Provider
-      value={{ filteredRestaurants, handleFilter, resetFiltered }}
+      value={{
+        filteredRestaurants,
+        handleFilter,
+        resetFiltered,
+        addRestraunt,
+        myAddedRestraunts,
+        setMyAddedRestraunts,
+        bookmarkedRestraunts,
+        setBookmarkedRestraunts,
+      }}
     >
       {children}
     </RestaurantContext.Provider>

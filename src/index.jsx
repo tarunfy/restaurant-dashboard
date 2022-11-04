@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import { AuthProvider } from "./contexts/AuthContext";
-import { RestrauntProvider } from "./contexts/ResuarantsContext";
+import { RestrauntProvider } from "./contexts/RestaurantContext";
 import { BrowserRouter } from "react-router-dom";
 
 String.prototype.capitalise = function () {

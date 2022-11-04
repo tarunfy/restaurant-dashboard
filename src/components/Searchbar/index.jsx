@@ -1,14 +1,21 @@
 import { Autocomplete, Button, CircularProgress } from "@mui/material";
 import React, { useContext, useState } from "react";
 import TextField from "@mui/material/TextField";
-import { RestaurantContext } from "../../contexts/ResuarantsContext";
+import { RestaurantContext } from "../../contexts/RestaurantContext";
 
 const Searchbar = () => {
-  const { filteredRestaurants, handleFilter, resetFiltered } =
+  const { filteredRestaurants, handleFilter, resetFiltered, addRestraunt } =
     useContext(RestaurantContext);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   const [selected, setSelected] = useState(null);
+
+  const handleAdd = () => {
+    if (!selected.fields.Name) {
+      return;
+    }
+    addRestraunt(selected.fields.Name);
+  };
 
   return (
     <div>
@@ -55,7 +62,7 @@ const Searchbar = () => {
             />
           )}
         />
-        <Button size="large" variant="contained">
+        <Button onClick={handleAdd} size="large" variant="contained">
           Add
         </Button>
       </div>

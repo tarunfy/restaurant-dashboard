@@ -5,7 +5,7 @@ const Dashboard = () => {
   return (
     <div className="grid grid-cols-6 min-h-screen w-screen">
       <Sidebar />
-      <div className="bg-slate-50 col-span-5 p-10">
+      <div className="bg-slate-100 col-span-5 p-10">
         <Outlet />
       </div>
     </div>
