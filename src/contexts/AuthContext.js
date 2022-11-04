@@ -6,6 +6,7 @@ export const AuthContext = createContext(null);
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     function getUser() {
@@ -16,11 +17,11 @@ export const AuthProvider = ({ children }) => {
       }
     }
     getUser();
-  }, []);
+  }, [user]);
 
   const login = async (username, password) => {
     setIsLoading(true);
-
+    setError("");
     try {
       const usersList = await axios.get(
         "https://api.airtable.com/v0/appjWdL7YgpxIxCKA/credenitals?maxRecords=3&view=Grid%20view",
@@ -49,14 +50,19 @@ export const AuthProvider = ({ children }) => {
 
       setUser(user.fields.username);
     } catch (err) {
-      console.log(err.message);
+      setError(err.message);
     }
 
     setIsLoading(false);
   };
 
+  const logout = () => {
+    localStorage.removeItem("user");
+    setUser(null);
+  };
+
   return (
-    <AuthContext.Provider value={{ user, login, isLoading }}>
+    <AuthContext.Provider value={{ user, login, isLoading, error, logout }}>
       {children}
     </AuthContext.Provider>
   );

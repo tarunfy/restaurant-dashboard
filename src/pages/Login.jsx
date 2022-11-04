@@ -6,7 +6,7 @@ import { AuthContext } from "../contexts/AuthContext";
 import { Navigate } from "react-router-dom";
 
 const Login = () => {
-  const { isLoading, login, user } = useContext(AuthContext);
+  const { isLoading, login, user, error } = useContext(AuthContext);
   const [userCreds, setUserCreds] = useState({
     username: "",
     password: "",
@@ -63,6 +63,8 @@ const Login = () => {
         >
           Login
         </LoadingButton>
+
+        {error && <p className="text-red-500 text-sm">{error}</p>}
       </form>
     </div>
   );

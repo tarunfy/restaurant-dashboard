@@ -18,7 +18,10 @@ const App = () => {
         path="/dashboard"
         element={user ? <Dashboard /> : <Navigate to="/login" />}
       />
-      <Route path="*" element={<ErrorPage />} />
+      <Route
+        path="*"
+        element={!user ? <ErrorPage /> : <Navigate to="/dashboard" />}
+      />
     </Routes>
   );
 };
