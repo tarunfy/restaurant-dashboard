@@ -4,20 +4,9 @@ import axios from "axios";
 export const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(localStorage.getItem("user"));
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
-
-  useEffect(() => {
-    function getUser() {
-      const currentUser = localStorage.getItem("user");
-
-      if (currentUser) {
-        setUser(currentUser);
-      }
-    }
-    getUser();
-  }, [user]);
 
   const login = async (username, password) => {
     setIsLoading(true);
