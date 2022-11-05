@@ -7,20 +7,12 @@ const Map = ({ location }) => {
     useContext(RestaurantContext);
 
   const handleRemove = () => {
-    const res = myAddedRestraunts;
-
-    console.log(res);
-
-    const index = res.indexOf(location);
-    if (index > -1) {
-      res.splice(index, 1);
-    }
-
-    setMyAddedRestraunts((prev) => res);
+    setMyAddedRestraunts(myAddedRestraunts.filter((r) => r !== location));
   };
 
   const handleBookmark = () => {
     setBookmarkedRestraunts((prev) => [...prev, location]);
+    handleRemove();
   };
 
   return (
